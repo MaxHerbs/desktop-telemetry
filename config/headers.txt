@@ -1,0 +1,5 @@
+{
+  'Content-Type': 'application/json',
+  'X-Goog-Api-Key': '{{ key }}' ,
+  'X-Goog-FieldMask': 'routes.duration,routes.distanceMeters'
+}

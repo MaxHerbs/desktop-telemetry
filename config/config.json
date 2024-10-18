@@ -1,0 +1,19 @@
+{
+  // This is a sample config. This file needs to be filled out with your own information.
+  // and put onto the SD card.
+  
+  "ssid": "your wifi name",
+  "password": "your wifi password",
+  "endpoint": "https://routes.googleapis.com/directions/v2:computeRoutes",
+
+  "units": "miles",
+
+  "postParams": {
+  	"start": "the start address",
+  	"end": "the end address"
+   },
+   
+   "headerParams": {
+   	"key": "google maps api key"
+   }
+}

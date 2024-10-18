@@ -1,0 +1,19 @@
+{
+  "origin": {
+    "address": "{{ start }}"
+  },
+  "destination": {
+    "address": "{{ end }}"
+  },
+  "travelMode": "DRIVE",
+  "routingPreference": "TRAFFIC_AWARE",
+  "computeAlternativeRoutes": false,
+  "routeModifiers": {
+    "avoidTolls": false,
+    "avoidHighways": false,
+    "avoidFerries": false
+  },
+  "languageCode": "en-US",
+  "units": "IMPERIAL"
+}
+

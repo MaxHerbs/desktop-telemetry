@@ -37,6 +37,15 @@ def main():
         "routingPreference":"TRAFFIC_AWARE"
     }
 
+    print("")
+    print("")
+    print("")
+    print(json.dumps(data))
+    print("")
+    print("")
+    print("")
+
+
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
     print(response.status_code)
