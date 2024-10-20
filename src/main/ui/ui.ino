@@ -164,10 +164,9 @@ void loop()
 
 
 
+
     char charDist[32];
     sprintf(charDist, "%0.1f miles", myInterface.getCommuteDistance());
-
-
     lv_label_set_text(ui_distance, charDist);
 
 
