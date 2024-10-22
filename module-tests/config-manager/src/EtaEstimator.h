@@ -21,7 +21,7 @@ public:
 
     float getCommuteDistance();
     int getCommuteTime();
-    String getConfigParam(String key);
+    // String getConfigParam(String key);
 
 private:
     String postBody;
@@ -36,8 +36,6 @@ private:
     String sendPostRequest();
     void populateVariables(String response);
 
-    String templateString(const String &templateStr, const String &placeholder, const String &value);
-    String buildTemplate(String templateFileName, String paramKey);
 };
 
 #endif

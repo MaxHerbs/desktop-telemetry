@@ -21,12 +21,11 @@ EtaEstimator::EtaEstimator(ConfigManager &_configManager, String jsonBaseKey) : 
 void EtaEstimator::begin()
 {
     // build the json for the post request
-    postBody = buildTemplate("/" + jsonBaseKey + "/postBody.txt", "postParams");
+    postBody = configManager.buildTemplateFromFile("/" + jsonBaseKey + "/postBody.txt", "postParams", jsonBaseKey);
     Serial.println("Post Body");
     Serial.println(postBody);
-    postHeaders = buildTemplate("/" + jsonBaseKey + "/headers.txt", "headerParams");
+    postHeaders = configManager.buildTemplateFromFile("/" + jsonBaseKey + "/headers.txt", "headerParams", jsonBaseKey);
     Serial.println(postHeaders);
-    SD.end();
 }
 
 // Updating the details
@@ -121,24 +120,3 @@ float EtaEstimator::getCommuteDistance()
     return commute_distance; // TODO: make this work
 }
 
-String EtaEstimator::templateString(const String &templateStr, const String &placeholder, const String &value)
-{
-    String result = templateStr;
-    result.replace(placeholder, value);
-    return result;
-}
-
-String EtaEstimator::buildTemplate(String templateFileName, String paramKey)
-{
-    String thisTemplate = String(configManager.readFile(SD, templateFileName.c_str()));
-
-    for (JsonPair pair : configManager.json[jsonBaseKey][paramKey].as<JsonObject>())
-    {
-        //    Serial.print("Key: ");
-        //    Serial.print(pair.key().c_str());
-        //    Serial.print(", Value: ");
-        //    Serial.println(pair.value().as<String>());
-        thisTemplate = templateString(thisTemplate, "{{ " + String(pair.key().c_str()) + " }}", pair.value().as<String>());
-    }
-    return thisTemplate;
-}

@@ -1,5 +1,7 @@
 #include "src/ConfigManager.h"
 #include "src/EtaEstimator.h"
+#include "src/WeatherMonitor.h"
+
 
 ConfigManager myConfig("/config.json", 5);
 
@@ -36,6 +38,16 @@ void setup() {
   Serial.print("Commute distance: ");
   Serial.println(commute_distance);
 
+
+
+
+
+
+  WeatherMonitor weatherMonitor(myConfig, "openWeatherApi");
+  weatherMonitor.updateWeatherInfo();
+  Serial.println("Weather...");
+  Serial.println(weatherMonitor.getTemperature());
+  Serial.println(weatherMonitor.getHumidity());
 
 }
 

@@ -82,3 +82,34 @@ char *ConfigManager::readFile(fs::FS &fs, const char *path)
 
     return fileStream;
 }
+
+
+
+
+String ConfigManager::templater(const String &templateStr, const String &placeholder, const String &value)
+{
+    String result = templateStr;
+    result.replace(placeholder, value);
+    return result;
+}
+
+String ConfigManager::buildTemplateFromFile(String templateFileName, String paramKey, String jsonBaseKey)
+{
+    String thisTemplate = String(readFile(SD, templateFileName.c_str()));
+
+    return buildTemplateFromString(thisTemplate, paramKey, jsonBaseKey); 
+}
+
+
+String ConfigManager::buildTemplateFromString(String text, String paramKey, String jsonBaseKey)
+{
+    for (JsonPair pair : json[jsonBaseKey][paramKey].as<JsonObject>())
+    {
+        //    Serial.print("Key: ");
+        //    Serial.print(pair.key().c_str());
+        //    Serial.print(", Value: ");
+        //    Serial.println(pair.value().as<String>());
+        text = templater(text, "{{ " + String(pair.key().c_str()) + " }}", pair.value().as<String>());
+    }
+    return text;
+}

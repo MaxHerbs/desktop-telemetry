@@ -16,6 +16,10 @@ public:
     int begin();
     char* readFile(fs::FS &fs, const char *path);
     
+    String templater(const String &templateStr, const String &placeholder, const String &value);
+    String buildTemplateFromFile(String templateFileName, String paramKey, String jsonBaseKey);
+    String buildTemplateFromString(String text, String paramKey, String jsonBaseKey);
+
     JsonDocument json;
 
 private:
