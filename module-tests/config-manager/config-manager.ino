@@ -46,9 +46,10 @@ void setup() {
   WeatherMonitor weatherMonitor(myConfig, "openWeatherApi");
   weatherMonitor.updateWeatherInfo();
   Serial.println("Weather...");
-  Serial.println(weatherMonitor.getTemperature());
-  Serial.println(weatherMonitor.getHumidity());
-
+  Serial.print(weatherMonitor.getTemperature());
+  Serial.println(" degrees");
+  Serial.print(weatherMonitor.getHumidity());
+  Serial.println("% humidity");
 }
 
 void loop() {
