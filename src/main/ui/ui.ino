@@ -1,11 +1,13 @@
 #include <lvgl.h>
 #include <TFT_eSPI.h>
 #include <ui.h>
+#include "src/ConfigManager.h"
+#include "src/EtaEstimator.h"
+#include "src/WeatherMonitor.h"
 
-#include "src/ApiInterface.h"
 
 #define sdCsPin 5
-ApiInterface myInterface(sdCsPin);
+ConfigManager myConfig("/config.json", sdCsPin);
 
 
 int updateFrequency = 30000;
@@ -116,10 +118,10 @@ void setup()
   Serial.println( "Setup done" );
   Serial.println("Setting up api");
 
-  myInterface.begin();
+  myConfig.begin();
 
-  String ssid = myInterface.getConfigParam("ssid");
-  String password = myInterface.getConfigParam("password");
+  String ssid = myConfig.json["ssid"].as<String>();
+  String password = myConfig.json["password"].as<String>();
 
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi...");
@@ -129,51 +131,43 @@ void setup()
   }
   Serial.println("Connected!");
 
-  int status = myInterface.updateCommuteDetails();
 
-  Serial.println(myInterface.getCommuteDistance());
-  Serial.println(myInterface.getCommuteTime());
-  Serial.println("Done!");
+  EtaEstimator estimator(myConfig, "etaApi");
+  estimator.begin();
+  estimator.updateCommuteDetails();
+
+
+  char charTime[32];
+  int commuteTime = estimator.getCommuteTime();
+
+  if (commuteTime > 60) {
+    int hr = 0;
+    int mins = 0;
+    while (commuteTime > 60) {
+      hr += 1;
+      commuteTime -= 60;
+    }
+    mins = commuteTime;
+    sprintf(charTime, "%d hr %d mins", hr, mins);
+
+  } else {
+    sprintf(charTime, "%d minutes", estimator.getCommuteTime());
+  }
+
+  lv_label_set_text(ui_time, charTime);
+
+
+  char charDist[32];
+  sprintf(charDist, "%0.1f miles", estimator.getCommuteDistance());
+  lv_label_set_text(ui_distance, charDist);
+
+
 }
 
 
 
 void loop()
 {
-  if (millis() - prevUpdate > updateFrequency) {
-    int status = myInterface.updateCommuteDetails();
-
-    char charTime[32];
-    int commuteTime = myInterface.getCommuteTime();
-    
-    if (commuteTime > 60) {
-      int hr = 0;
-      int mins = 0;
-      while (commuteTime > 60) {
-        hr += 1;
-        commuteTime -= 60;
-      }
-      mins = commuteTime;
-      sprintf(charTime, "%d hr %d mins", hr, mins);
-      
-    } else {
-      sprintf(charTime, "%d minutes", myInterface.getCommuteTime());
-    }
-
-    lv_label_set_text(ui_time, charTime);
-
-
-
-
-    char charDist[32];
-    sprintf(charDist, "%0.1f miles", myInterface.getCommuteDistance());
-    lv_label_set_text(ui_distance, charDist);
-
-
-    prevUpdate = millis();
-  }
-
-
   lv_timer_handler(); /* let the GUI do its work */
   delay(5);
 }
