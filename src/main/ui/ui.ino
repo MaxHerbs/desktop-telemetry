@@ -8,7 +8,7 @@
 
 #define sdCsPin 5
 ConfigManager myConfig("/config.json", sdCsPin);
-
+EtaEstimator estimator(myConfig, "etaApi");
 
 int updateFrequency = 30000;
 int prevUpdate = -updateFrequency;
@@ -132,7 +132,7 @@ void setup()
   Serial.println("Connected!");
 
 
-  EtaEstimator estimator(myConfig, "etaApi");
+
   estimator.begin();
   estimator.updateCommuteDetails();
 
