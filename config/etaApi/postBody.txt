@@ -5,7 +5,7 @@
   "destination": {
     "address": "{{ end }}"
   },
-  "travelMode": "DRIVE",
+  "travelMode": "{{ modeOfTransport }}",
   "routingPreference": "TRAFFIC_AWARE",
   "computeAlternativeRoutes": false,
   "routeModifiers": {

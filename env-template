@@ -1,5 +1,0 @@
-# Setup this template and rename it to .env to run dev programs
-
-export GOOGLE_API_KEY = "..."
-export MAPS_ORIGIN = "Start address"
-export MAPS_DESTINATION = "Destination address"
