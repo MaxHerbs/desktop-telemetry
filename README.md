@@ -58,14 +58,14 @@ The project will involve an ornament displaying current commute time, weather in
 <div style="display: flex; align-items: flex-start; width: 100%;">
   <div style="flex: 1; padding: 10px;">
     <figure style="margin: 0;">
-      <img src="/MaxHerbs/desktop-telemetry/raw/main/docs/images/pcb-case.jpg" alt="" style="width: 100%;">
+      <img src="docs/images/pcb-case.jpg" alt="" style="width: 100%;">
       <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The case and PCB</figcaption>
     </figure>
   </div>
 
   <div style="flex: 1; padding: 10px;">
     <figure style="margin: 0;">
-      <img src="/MaxHerbs/desktop-telemetry/raw/main/docs/images/screen-on.jpg" alt="" style="width: 100%;">
+      <img src="docs/images/screen-on.jpg" alt="" style="width: 100%;">
       <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The internals.</figcaption>
     </figure>
   </div>
