@@ -2,10 +2,9 @@
 All files involved in the development of a Desktop telemetry system, based on an ESP32. 
 The project will involve an ornament displaying current commute time, weather information, and more. 
 
-**CURRENT STATUS**: Awaiting PCBs
 
 # Repository Structure
-``` bash
+``` tree
 ├── config - This contains the files as they exist on the SD card.
 │   ├── config.json - A template of the real config
 │   └── etaApi
@@ -53,6 +52,11 @@ The project will involve an ornament displaying current commute time, weather in
                 ├── WeatherMonitor.cpp
                 └── WeatherMonitor.h
 ```
+
+# Status
+              The Case                  |	                    Internals
+:--------------------------------------:|:---------------------------------------------------:
+![PCBs](docs/images/pcb-case.jpg "PCB") | ![Internal](docs/images/screen-on.jpg "Internals")
 
 
 

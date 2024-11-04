@@ -38,5 +38,5 @@ def get_weather(city):
 
 # Example usage
 if __name__ == "__main__":
-    city_name = "Harwell, Oxford, UK"
+    city_name = "___"
     get_weather(city_name)
