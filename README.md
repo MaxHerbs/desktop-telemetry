@@ -54,11 +54,25 @@ The project will involve an ornament displaying current commute time, weather in
 ```
 
 # Status
-              The Case                  |	                    Internals
-:--------------------------------------:|:---------------------------------------------------:
-![PCBs](docs/images/pcb-case.jpg "PCB") | ![Internal](docs/images/screen-on.jpg "Internals")
+The Case      |	  Internals
+:-------------------------:|:-------------------------:
+![PCBs](docs/images/pcb-case.jpg "PCB") |  ![Internal](docs/images/screen-on.jpg "Internals")
 
+<div style="display: flex; align-items: flex-start; width: 100%;">
+  <div style="flex: 1; padding: 10px;">
+    <figure style="margin: 0;">
+      <img src="/MaxHerbs/desktop-telemetry/raw/main/docs/images/pcb-case.jpg" alt="" style="width: 100%;">
+      <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The case and PCB</figcaption>
+    </figure>
+  </div>
 
+  <div style="flex: 1; padding: 10px;">
+    <figure style="margin: 0;">
+      <img src="/MaxHerbs/desktop-telemetry/raw/main/docs/images/screen-on.jpg" alt="" style="width: 100%;">
+      <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The internals.</figcaption>
+    </figure>
+  </div>
+</div>
 
 
 # Required libraries
