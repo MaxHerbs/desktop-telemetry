@@ -54,23 +54,16 @@ The project will involve an ornament displaying current commute time, weather in
 ```
 
 # Status
-
 <div style="display: flex; align-items: flex-start; width: 100%;">
   <div style="flex: 1; padding: 10px;">
-    <figure style="margin: 0;">
-      <img src="docs/images/pcb-case.jpg" alt="" style="width: 100%;">
-      <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The case and PCB</figcaption>
-    </figure>
+    <img src="docs/images/pcb-case.jpg" alt="" style="width: 100%;">
+    <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The case and PCB</figcaption>
   </div>
-
   <div style="flex: 1; padding: 10px;">
-    <figure style="margin: 0;">
-      <img src="docs/images/screen-on.jpg" alt="" style="width: 100%;">
-      <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The internals.</figcaption>
-    </figure>
+    <img src="docs/images/screen-on.jpg" alt="" style="width: 100%;">
+    <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The internals.</figcaption>
   </div>
 </div>
-
 
 # Required libraries
 Python requirements are listed in the `requirements.txt` file.
