@@ -57,14 +57,14 @@ The project will involve an ornament displaying current commute time, weather in
 <div style="display: flex; align-items: flex-start; width: 100%;">
   <div style="flex: 1; padding: 10px;">
     <figure style="margin: 0;">
-      <img src="docs/images/pcb-case.jpg" alt="Breakout cable to upload code to the ESP01" style="width: 100%;">
+      <img src="docs/images/pcb-case.jpg" alt="Breakout cable to upload code to the ESP01" style="width: 100%; max-width: 300px;">
       <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The case & PCB.</figcaption>
     </figure>
   </div>
 
   <div style="flex: 1; padding: 10px;">
     <figure style="margin: 0;">
-      <img src="docs/images/screen-on.jpg" alt="The whole module plugged in" style="width: 100%;">
+      <img src="docs/images/screen-on.jpg" alt="The whole module plugged in" style="width: 100%; max-width: 300px;">
       <figcaption style="text-align: center; margin-top: 8px; font-style: italic;">The internals.</figcaption>
     </figure>
   </div>
