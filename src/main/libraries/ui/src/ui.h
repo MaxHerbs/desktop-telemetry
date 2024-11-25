@@ -25,13 +25,22 @@ extern "C" {
 #include "ui_helpers.h"
 #include "ui_events.h"
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
+// SCREEN: ui_commuteScreen
+void ui_commuteScreen_screen_init(void);
+extern lv_obj_t * ui_commuteScreen;
 extern lv_obj_t * ui_time;
 extern lv_obj_t * ui_distance;
-extern lv_obj_t * ui_CommuteTime;
-extern lv_obj_t * ui_;
+extern lv_obj_t * ui_Commute_Time;
+extern lv_obj_t * ui_Distance;
+// SCREEN: ui_weatherScreen
+void ui_weatherScreen_screen_init(void);
+extern lv_obj_t * ui_weatherScreen;
+extern lv_obj_t * ui_Current_Temp;
+extern lv_obj_t * ui_temperature;
+extern lv_obj_t * ui_Humiditylbl;
+extern lv_obj_t * ui_humidity;
+extern lv_obj_t * ui_conditionslbl;
+extern lv_obj_t * ui_conditions;
 extern lv_obj_t * ui____initial_actions0;
 
 

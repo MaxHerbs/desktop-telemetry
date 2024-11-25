@@ -9,13 +9,12 @@
 #define sdCsPin 5
 ConfigManager myConfig("/config.json", sdCsPin);
 EtaEstimator estimator(myConfig, "etaApi");
+WeatherMonitor weatherMonitor(myConfig, "openWeatherApi");
 
-int updateFrequency = 30000;
+int updateFrequency = 5000;
 int prevUpdate = -updateFrequency;
 
-/*Don't forget to set Sketchbook location in File/Preferencesto the path of your UI project (the parent foder of this INO file)*/
 
-/*Change to your screen resolution*/
 static const uint16_t screenWidth  = 240;
 static const uint16_t screenHeight = 240;
 
@@ -23,6 +22,10 @@ static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf[ screenWidth * screenHeight / 10 ];
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
+
+
+
+int currScreen = 0;
 
 #if LV_USE_LOG != 0
 /* Serial debugging */
@@ -91,7 +94,7 @@ void setup()
 #endif
 
   tft.begin();          /* TFT init */
-  tft.setRotation( 3 ); /* Landscape orientation, flipped */
+  tft.setRotation( 0 ); /* Landscape orientation, flipped */
 
   lv_disp_draw_buf_init( &draw_buf, buf, NULL, screenWidth * screenHeight / 10 );
 
@@ -134,9 +137,55 @@ void setup()
 
 
   estimator.begin();
+  weatherMonitor.begin();
+  weatherMonitor.updateWeatherInfo();
   estimator.updateCommuteDetails();
 
 
+
+
+
+  Serial.println(weatherMonitor.getConditions());
+
+
+
+}
+
+
+float switchCounter = prevUpdate;
+void loop()
+{
+  if (millis() - switchCounter > updateFrequency) {
+    changeScreen();
+    switchCounter = millis();
+  }
+
+
+  lv_timer_handler(); /* let the GUI do its work */
+  delay(5);
+}
+
+
+void changeScreen() {
+  if (currScreen > 1) {
+    currScreen = 0;
+  }
+
+  if (currScreen == 0) {
+    lv_scr_load(ui_commuteScreen);
+    setupCommuteScreen();
+  } else if (currScreen == 1) {
+    lv_scr_load(ui_weatherScreen);
+    setupWeatherScreen();
+  }
+  currScreen++;
+
+}
+
+
+
+void setupCommuteScreen() {
+  Serial.println("Setting up commute screen...");
   char charTime[32];
   int commuteTime = estimator.getCommuteTime();
 
@@ -160,14 +209,26 @@ void setup()
   char charDist[32];
   sprintf(charDist, "%0.1f miles", estimator.getCommuteDistance());
   lv_label_set_text(ui_distance, charDist);
-
-
+  Serial.println("Finished setting up commute screen");
 }
 
 
 
-void loop()
-{
-  lv_timer_handler(); /* let the GUI do its work */
-  delay(5);
+void setupWeatherScreen() {
+  Serial.println("Setting up weather screen...");
+  char charTemp[32];
+  float temperature = weatherMonitor.getTemperature();
+  sprintf(charTemp, "%.02f c", temperature);
+  lv_label_set_text(ui_temperature, charTemp);
+
+    char charHumidity[32];
+  float humidity = weatherMonitor.getHumidity();
+  sprintf(charTemp, "%.02f %", humidity);
+  lv_label_set_text(ui_humidity, charTemp);
+
+
+  char charConditions[32];
+  sprintf(charConditions, "%s", weatherMonitor.getConditions());
+  lv_label_set_text(ui_conditions, charConditions);
+  Serial.println("Finished setting up weather screen");
 }

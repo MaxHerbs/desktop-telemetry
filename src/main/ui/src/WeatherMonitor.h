@@ -21,6 +21,7 @@ public:
 
     float getTemperature();
     float getHumidity();
+    String getConditions();
 
     String getConfigParam(String key);
 

@@ -9,13 +9,24 @@
 ///////////////////// VARIABLES ////////////////////
 
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-lv_obj_t * ui_Screen1;
+// SCREEN: ui_commuteScreen
+void ui_commuteScreen_screen_init(void);
+lv_obj_t * ui_commuteScreen;
 lv_obj_t * ui_time;
 lv_obj_t * ui_distance;
-lv_obj_t * ui_CommuteTime;
-lv_obj_t * ui_;
+lv_obj_t * ui_Commute_Time;
+lv_obj_t * ui_Distance;
+
+
+// SCREEN: ui_weatherScreen
+void ui_weatherScreen_screen_init(void);
+lv_obj_t * ui_weatherScreen;
+lv_obj_t * ui_Current_Temp;
+lv_obj_t * ui_temperature;
+lv_obj_t * ui_Humiditylbl;
+lv_obj_t * ui_humidity;
+lv_obj_t * ui_conditionslbl;
+lv_obj_t * ui_conditions;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -38,7 +49,8 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
+    ui_commuteScreen_screen_init();
+    ui_weatherScreen_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_Screen1);
+    lv_disp_load_scr(ui_commuteScreen);
 }

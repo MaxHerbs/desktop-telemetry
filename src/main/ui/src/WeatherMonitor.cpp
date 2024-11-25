@@ -9,9 +9,13 @@
 
 float temperature;
 float humidity;
+String conditions;
 
 #define max_str_len 4096
 #define mile_conversion 1609.34
+
+int update_period = 60000;
+int prev_update = -update_period;
 
 // Constructor
 WeatherMonitor::WeatherMonitor(ConfigManager &_configManager, String jsonBaseKey) : configManager(_configManager), jsonBaseKey(jsonBaseKey)
@@ -25,9 +29,16 @@ void WeatherMonitor::begin()
 // Updating the details
 int WeatherMonitor::updateWeatherInfo()
 {
-    String response = sendRequest();
-    populateVariables(response);
-    return 1;
+    if (millis() - prev_update > update_period)
+    {
+        Serial.println("Enough time passed since last update, updating weather info");
+        String response = sendRequest();
+        populateVariables(response);
+        prev_update = millis();
+        return 1;
+    }
+    Serial.println("Not enough time passed since last update, not updating weather info");
+    return 0;
 }
 
 void WeatherMonitor::populateVariables(String response)
@@ -44,6 +55,7 @@ void WeatherMonitor::populateVariables(String response)
     Serial.println(response);
     temperature = responseJsonObj["main"]["temp"].as<float>();
     humidity = responseJsonObj["main"]["humidity"].as<float>();
+    conditions = responseJsonObj["weather"][0]["main"].as<String>();
 }
 String WeatherMonitor::sendRequest()
 {
@@ -91,10 +103,15 @@ String WeatherMonitor::sendRequest()
 
 float WeatherMonitor::getTemperature()
 {
-    return temperature; // TODO: make this work
+    return temperature;
 }
 
 float WeatherMonitor::getHumidity()
 {
-    return humidity; // TODO: make this work
+    return humidity;
+}
+
+String WeatherMonitor::getConditions()
+{
+    return conditions;
 }
